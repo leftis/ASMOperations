@@ -1,3 +1,4 @@
+require 'pry'
 require 'spec_helper'
 
 describe ASMOperations::Binary do
@@ -7,8 +8,20 @@ describe ASMOperations::Binary do
       expect(obj.warnings).not_to be_empty
     end
 
-    it "accepts a 16bit binary number as argument" do
+    it "does not accept bit numbers larger than 64 bits" do
+      obj = ASMOperations::Binary.new('00000000000111110000000000011111000000000001111100000000000111110')
+      expect(obj.errors).not_to be_empty
+    end
+
+    it "accepts a 64bit binary number as argument" do
+      obj = ASMOperations::Binary.new('0000000000011111000000000001111100000000000111110000000000011111')
+      expect(obj.binary).not_to be(nil)
+      expect(obj.bit_count).to eq(64)
+    end
+
+    it "accepts a 32bit binary number as argument" do
       obj = ASMOperations::Binary.new('00000000000111110000000000011111')
+      binding.pry
       expect(obj.binary).not_to be(nil)
       expect(obj.bit_count).to eq(32)
     end

@@ -19,10 +19,9 @@ module ASMOperations
     private
 
     def fix_bytes
-      if @binary.length < bit_count
-        remaining_bits = bit_count - @binary.length
-        @binary = Array.new(remaining_bits) { '0' }.join('') + @binary
-      end
+      return false if @binary.length == bit_count || bit_count == 0
+      remaining_bits = bit_count - @binary.length
+      @binary = Array.new(remaining_bits) { '0' }.join('') + @binary
     end
 
     def bits_powers
@@ -48,8 +47,11 @@ module ASMOperations
         16
       when 17..32
         32
+      when 33..64
+        64
       else
-        @errors << 'Not an 8 || 16 || 32 bit'
+        @errors.push 'Not an 8 || 16 || 32 || 64  bit'
+        0
       end
     end
   end
