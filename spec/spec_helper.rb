@@ -1,4 +1,4 @@
-require 'asm_operations'
+require "asm_operations"
 require 'simplecov'
 require 'coveralls'
 Coveralls.wear!
