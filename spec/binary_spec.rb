@@ -1,7 +1,13 @@
-require 'pry'
 require 'spec_helper'
 
 describe ASMOperations::Binary do
+  describe "#to_hex" do
+    it 'converts a binary to hex' do
+      obj = ASMOperations::Binary.new('1000000000011111')
+      expect(obj.to_hex).to eq('801F')
+    end
+  end
+
   describe "#new" do
     it "does warn on signed binary numbers" do
       obj = ASMOperations::Binary.new('1000000000011111')
@@ -21,7 +27,6 @@ describe ASMOperations::Binary do
 
     it "accepts a 32bit binary number as argument" do
       obj = ASMOperations::Binary.new('00000000000111110000000000011111')
-      binding.pry
       expect(obj.binary).not_to be(nil)
       expect(obj.bit_count).to eq(32)
     end

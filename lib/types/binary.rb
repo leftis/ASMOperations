@@ -16,6 +16,13 @@ module ASMOperations
       end
     end
 
+    def to_hex
+      hexed = binary.split('').each_slice(4).to_a.map do |binary_slice|
+        decimal = Binary.new(binary_slice.join('')).to_decimal
+        ASMOperations::HEX_TABLE.invert[decimal]
+      end.join('')
+    end
+
     private
 
     def fix_bytes
@@ -28,7 +35,7 @@ module ASMOperations
       @binary.split('').reverse.map.with_index(0).to_a.map do |object|
         next if object.first == '0'
         object.last
-      end.compact!
+      end.compact
     end
 
     def unsigned?
