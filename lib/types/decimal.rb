@@ -10,9 +10,7 @@ module ASMOperations
 
     def to_binary
       remaining, bit = decimal.to_i, 0
-      bits = []
-
-      bits = [0, 0, 0, 0] if remaining == 0
+      bits = (remaining == 0 ? [0, 0, 0, 0] : [])
 
       while remaining > 0 do
         bits.push(remaining % 2)
