@@ -8,7 +8,7 @@ module ASMOperations
     end
 
     def fix_byte(byte)
-      return if byte.length == 4 || byte.empty?
+      return byte if byte.length == 4 || byte.empty?
       remaining_bits = 4 - byte.length
       Array.new(remaining_bits) { '0' }.join('') + byte
     end
@@ -17,7 +17,7 @@ module ASMOperations
       binary = []
       hex.split('').map do |element|
         hexed_element = HEX_TABLE.keys.detect { |k| k.match(Regexp.new(element, Regexp::IGNORECASE)) }
-        binary << fix_byte(ASMOperations::Decimal.new(HEX_TABLE[hexed_element]).to_binary)
+        binary << fix_byte(ASMOperations::Decimal.new(HEX_TABLE[hexed_element.to_s]).binary)
       end
       binary.join('')
     end
