@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    ASMOperations (0.0.1)
+      thor (= 0.19.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,8 +55,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ASMOperations!
   coveralls
-  pry
+  pry (= 0.10.1)
   rake
-  rspec
+  rspec (= 3.1.0)
   simplecov
