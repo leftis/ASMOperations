@@ -1,6 +1,5 @@
 module ASMOperations
   class Binary
-
     attr_accessor :bit_count, :binary, :errors, :warnings
 
     def initialize(unsigned_binary)
@@ -17,7 +16,7 @@ module ASMOperations
     end
 
     def to_hex
-      hexed = binary.split('').each_slice(4).to_a.map do |binary_slice|
+      binary.split('').each_slice(4).to_a.map do |binary_slice|
         decimal = Binary.new(binary_slice.join('')).to_decimal
         ASMOperations::HEX_TABLE.invert[decimal]
       end.join('')
@@ -39,9 +38,8 @@ module ASMOperations
     end
 
     def unsigned?
-      if @binary.split('').first != '0'
-        @warnings << 'Number is a signed one'
-      end
+      return if @binary.split('').first == '0'
+      @warnings << 'Number is a signed one'
     end
 
     def count_bits

@@ -1,6 +1,5 @@
 module ASMOperations
   class Decimal < Binary
-
     attr_accessor :decimal
 
     def initialize(decimal)
@@ -9,10 +8,10 @@ module ASMOperations
     end
 
     def to_binary
-      remaining, bit = decimal.to_i, 0
+      remaining, _bit = decimal.to_i, 0
       bits = (remaining == 0 ? [0, 0, 0, 0] : [])
 
-      while remaining > 0 do
+      while remaining > 0
         bits.push(remaining % 2)
         remaining /= 2
       end

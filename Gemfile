@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'coveralls', require: false
-gem 'rspec', group: :development
-gem 'simplecov', :require => false, :group => :test
-gem 'pry', group: :development
-gem 'rake', group: :test
+gemspec
+
+group :development do
+  gem 'coveralls', require: false
+end
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'rake', group: :test
+end

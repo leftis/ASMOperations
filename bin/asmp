@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
+
+require 'thor'
+require 'asm_operations'
+require 'pry'
+
+module ASMOperations
+  class CLI < Thor
+    desc 'b2d', 'Converts binary to decimal'
+    def b2d(binary)
+      puts Binary.new(binary).to_decimal
+    end
+
+    desc 'b2h', 'Converts binary to hex'
+    def b2h(binary)
+      puts Binary.new(binary).to_hex
+    end
+
+    desc 'd2b', 'Converts decimal to binary'
+    def d2b(decimal)
+      decimal = Decimal.new(decimal)
+      puts decimal.binary
+    end
+
+    desc 'd2h', 'Converts decimal to hex'
+    def d2h(decimal)
+      decimal = Decimal.new(decimal)
+      puts decimal.to_hex
+    end
+
+    desc 'h2b', 'Converts hexademical to binary'
+    def h2b(hex)
+      hex = Hex.new(hex)
+      puts hex.binary
+    end
+
+    desc 'h2d', 'Converts hexademical to decimal'
+    def h2d(hex)
+      hex = Hex.new(hex)
+      puts b2d(hex.binary)
+    end
+  end
+end
+
+ASMOperations::CLI.start(ARGV)
